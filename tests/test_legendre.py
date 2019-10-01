@@ -28,11 +28,11 @@ VALUES = [randint(0, 2**256 - 1) for i in range(10)]
         (v, p) for p in PRIMES for v in VALUES
     ]
 )
-def test_legendre_bit_multi(legendre_bit_contract,
-                      w3,
-                      value,
-                      prime):
-    call = legendre_bit_contract.functions.legendre_bit_multi_test(value, prime, 100)
+def test_legendre_bit_multi(legendre_bounty_contract,
+                            w3,
+                            value,
+                            prime):
+    call = legendre_bounty_contract.functions.legendre_bit_multi_test(value, prime, 100)
     print(call.estimateGas())
     result = call.call()
     assert result == jacobi_bit_multi(value, prime, 100)
