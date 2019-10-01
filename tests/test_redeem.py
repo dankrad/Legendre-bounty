@@ -95,6 +95,7 @@ def test_early_redeem(legendre_bounty_contract,
     timestamp = w3.eth.getBlock('latest')['timestamp']
     tester.time_travel(timestamp + LOCK_DELAY - 1000)
     tester.mine_block()
+    tester.mine_block()
 
     call = legendre_bounty_contract.functions.redeem_bounty(challenge_no, challenge["key"])
     
