@@ -2,7 +2,7 @@ from hashlib import (
     sha256,
 )
 from random import (
-    randint,
+    Random,
 )
 from .utils import (
     jacobi_bit_multi
@@ -20,7 +20,9 @@ PRIMES = [
 #57896044618658097711785492504343953926634992332820282019728792003956564820063
 ]
 
-VALUES = [randint(0, 2**256 - 1) for i in range(10)]
+# Make tests reproducible by setting the RNG seed, for comparing gas costs between runs.
+rng = Random(123)
+VALUES = [rng.randint(0, 2**256 - 1) for i in range(10)]
 
 @pytest.mark.parametrize(
     'value,prime',
