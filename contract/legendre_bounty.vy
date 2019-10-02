@@ -83,8 +83,8 @@ def legendre_bit_multi(input_a: uint256, q: uint256, input_n: uint256) -> uint25
     r: uint256 = 0
     n: uint256 = input_n
     for i in range(256):
-        r *= 2
-        r += self.legendre_bit(a, q)
+        r = shift(r, 1)
+        r = bitwise_or(r, self.legendre_bit(a, q))
         a += 1
         n -= 1
         if n == 0:
