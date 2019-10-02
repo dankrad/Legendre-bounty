@@ -57,7 +57,7 @@ def legendre_bit(input_a: uint256, q: uint256) -> uint256:
     if a == 0:
         return 1
 
-    assert(q > a and q % 2 == 1)
+    assert(q > a and bitwise_and(q, 1) == 1)
 
     e: uint256 = (q - 1) / 2
     b: uint256 = 32
@@ -71,7 +71,7 @@ def legendre_bit(input_a: uint256, q: uint256) -> uint256:
                                 convert(e, bytes32), # Exponent
                                 convert(q, bytes32)  # Modulus
     ), gas=100000, outsize=32), uint256)
-    
+
     if c == q - 1:
         return 0
     return 1
@@ -83,8 +83,8 @@ def legendre_bit_multi(input_a: uint256, q: uint256, input_n: uint256) -> uint25
     r: uint256 = 0
     n: uint256 = input_n
     for i in range(256):
-        r *= 2
-        r += self.legendre_bit(a, q)
+        r = shift(r, 1)
+        r = bitwise_or(r, self.legendre_bit(a, q))
         a += 1
         n -= 1
         if n == 0:
