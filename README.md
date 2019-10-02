@@ -6,7 +6,7 @@ The contract provides an interface to redeem a bounty that was set for Legendre 
 
 # Requirements
 
-This project uses `pipenv`, [https://docs.pipenv.org/en/latest/](https://docs.pipenv.org/en/latest/).
+This project uses `pipenv`, https://docs.pipenv.org/en/latest/.
 
 ## Install
 
@@ -18,7 +18,7 @@ pipenv install
 ## Compile
 
 ```bash
-vyper contract/legendre_bit.vy
+vyper contract/legendre_bounty.vy
 ```
 
 ## Run tests
@@ -26,4 +26,12 @@ vyper contract/legendre_bit.vy
 ```bash
 make test_install
 make test
+```
+
+## Run with gas cost estimates
+
+To enable debug printing, run pytest with extra flags:
+
+```bash
+pipenv run pytest -s -v -k test_legendre_bit_multi
 ```
