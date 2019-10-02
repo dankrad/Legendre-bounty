@@ -8,7 +8,7 @@ struct Challenge:
 LOOP_ROUNDS: constant(uint256) = 2**32
 HOUR: constant(timedelta) = 3600
 DAY: constant(timedelta) = 24 * HOUR
-YEAR: constant(timedelta) = 365 * HOUR
+YEAR: constant(timedelta) = 365 * DAY
 CONTRACT_VALIDITY: constant(timedelta) = 3 * YEAR
 LOCK_DELAY: constant(timedelta) = 1 * DAY
 

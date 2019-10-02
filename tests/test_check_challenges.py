@@ -9,20 +9,8 @@ import pytest
 
 import eth_utils
 
-from .utils import (
-    jacobi_bit_multi
-)
 from .challenges import challenges
 
-def jacobi_bit_mpz(a, n):
-    return 1 if jacobi(a, n) >= 0 else 0
-
-def jacobi_bit_multi(a, n, m):
-    r = 0
-    for i in range(m):
-        r *= 2
-        r += jacobi_bit_mpz(a + i, n)
-    return r
 
 @pytest.mark.parametrize(
     'challenge_no,challenge', challenges.items()
