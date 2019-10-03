@@ -130,3 +130,17 @@ def test_incorrect_redeem(legendre_bounty_contract,
 
     call = legendre_bounty_contract.functions.redeem_bounty(challenge_no, challenge["key"] + 1)
     assert_tx_failed(call.transact)
+
+
+def test_double_lock(legendre_bounty_contract,
+                       a0,
+                       w3,
+                       tester,
+                       assert_tx_failed):
+
+    lock_call = legendre_bounty_contract.functions.lock_bounty(sha256((0).to_bytes(32, "big")
+        + bytes.fromhex(a0[2:]).rjust(32, b"\0")).digest())
+    lc_tx_hash = lock_call.transact()
+    lc_tx_receipt = w3.eth.waitForTransactionReceipt(lc_tx_hash)
+
+    assert_tx_failed(lock_call.transact)

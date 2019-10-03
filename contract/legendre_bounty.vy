@@ -98,6 +98,7 @@ def legendre_bit_multi_test(input_a: uint256, q: uint256, input_n: uint256) -> u
 
 @public
 def lock_bounty(lock_hash: bytes32):
+    assert self.locks[lock_hash] == 0
     self.locks[lock_hash] = block.timestamp + LOCK_DELAY
 
 
