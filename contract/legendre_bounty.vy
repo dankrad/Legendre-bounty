@@ -5,11 +5,10 @@ struct Challenge:
     bounty: wei_value
     redeemed: bool
 
-LOOP_ROUNDS: constant(uint256) = 2**32
+LEGENDRE_BIT_MULTI_MAX: constant(uint256) = 256
 HOUR: constant(timedelta) = 3600
 DAY: constant(timedelta) = 24 * HOUR
 YEAR: constant(timedelta) = 365 * DAY
-CONTRACT_VALIDITY: constant(timedelta) = 3 * YEAR
 LOCK_DELAY: constant(timedelta) = 1 * DAY
 
 contract_terminates: timestamp
@@ -24,7 +23,6 @@ challenges_length: uint256
 @payable
 def __init__():
     self.owner = msg.sender
-    self.contract_terminates = block.timestamp + CONTRACT_VALIDITY
     # Test challenges
     self.challenges[0] = Challenge({check_value: 11000376394030634920152109547510169061,
                         check_length: 128,
@@ -82,7 +80,8 @@ def legendre_bit_multi(input_a: uint256, q: uint256, input_n: uint256) -> uint25
     a: uint256 = input_a
     r: uint256 = 0
     n: uint256 = input_n
-    for i in range(256):
+    assert input_n < LEGENDRE_BIT_MULTI_MAX
+    for i in range(LEGENDRE_BIT_MULTI_MAX):
         r = shift(r, 1)
         r = bitwise_or(r, self.legendre_bit(a, q))
         a += 1
@@ -121,5 +120,4 @@ def redeem_bounty(challenge_no: uint256, key: uint256):
 @public
 def terminate_contract():
     assert msg.sender == self.owner
-    assert block.timestamp >= self.contract_terminates
     selfdestruct(self.owner)
