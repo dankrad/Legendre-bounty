@@ -9,14 +9,14 @@ LEGENDRE_BIT_MULTI_MAX: constant(uint256) = 256
 HOUR: constant(timedelta) = 3600
 DAY: constant(timedelta) = 24 * HOUR
 YEAR: constant(timedelta) = 365 * DAY
-LOCK_DELAY: constant(timedelta) = 1 * DAY
+CLAIM_DELAY: constant(timedelta) = 1 * DAY
 
 owner: address 
 
 challenges: public(map(uint256, Challenge))
 challenges_length: public(uint256)
 
-locks: public(map(bytes32, timestamp))
+claims: public(map(bytes32, timestamp))
 
 
 @public
@@ -102,9 +102,9 @@ def legendre_bit_multi_test(input_a: uint256, q: uint256, input_n: uint256) -> u
 
 
 @public
-def lock_bounty(lock_hash: bytes32):
-    assert self.locks[lock_hash] == 0
-    self.locks[lock_hash] = block.timestamp + LOCK_DELAY
+def claim_bounty(claim_hash: bytes32):
+    assert self.claims[claim_hash] == 0
+    self.claims[claim_hash] = block.timestamp + CLAIM_DELAY
 
 
 @public
@@ -113,9 +113,9 @@ def redeem_bounty(challenge_no: uint256, key: uint256):
     challenge: Challenge = self.challenges[challenge_no]
     assert not self.challenges[challenge_no].redeemed
 
-    lock_hash: bytes32 = sha256(concat(convert(key, bytes32), convert(msg.sender, bytes32))) #, convert(msg.sender, bytes32)
-    assert self.locks[lock_hash] > 0
-    assert self.locks[lock_hash] < block.timestamp
+    claim_hash: bytes32 = sha256(concat(convert(key, bytes32), convert(msg.sender, bytes32))) #, convert(msg.sender, bytes32)
+    assert self.claims[claim_hash] > 0
+    assert self.claims[claim_hash] < block.timestamp
 
     check_value: uint256 = self.legendre_bit_multi(key, self.challenges[challenge_no].prime, self.challenges[challenge_no].check_length)
     assert check_value == self.challenges[challenge_no].check_value
