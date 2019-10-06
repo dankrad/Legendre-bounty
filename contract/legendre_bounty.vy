@@ -24,29 +24,29 @@ claims: public(map(bytes32, timestamp))
 def __init__():
     self.owner = msg.sender
     # Test challenges
-    self.challenges[0] = Challenge({check_value: 11000376394030634920152109547510169061,
+    self.challenges[0] = Challenge({check_value: convert(0x0000000000000000000000000000000005d3446a44efe462f105619a1523928f, uint256),
                         check_length: 128,
-                        prime: 18446744073709551629,
+                        prime: convert(0x000000000000000000000000000000000000000000000000ffffffffffffffc5, uint256),
                         bounty: 1000000000000000000,
                         redeemed: False})
-    self.challenges[1] = Challenge({check_value: 230210477493954852901776032461715770460580566,
+    self.challenges[1] = Challenge({check_value: convert(0x000000000000000000000000000ccabbdd1a2ce2c7fba2177a60f26e4da3dfe4, uint256),
                         check_length: 148,
-                        prime: 18889465931478580854821,
+                        prime: convert(0x0000000000000000000000000000000000000000000003ffffffffffffffffdd, uint256),
                         bounty: 2000000000000000000,
                         redeemed: False})
-    self.challenges[2] = Challenge({check_value: 211315256989990178547101110263436988077215608,
+    self.challenges[2] = Challenge({check_value: convert(0x000000000000000000000000000665172ef496d21b642f9762a741d65e1acb7e, uint256),
                         check_length: 148,
-                        prime: 19342813113834066795298819,
+                        prime: convert(0x0000000000000000000000000000000000000000000fffffffffffffffffffdd, uint256),
                         bounty: 4000000000000000000,
                         redeemed: False})
-    self.challenges[3] = Challenge({check_value: 242829690746151433119885568607676994314595293,
+    self.challenges[3] = Challenge({check_value: convert(0x0000000000000000000000000006f18b295f9e4d35025473b589dc1b0b5e10c7, uint256),
                         check_length: 148,
-                        prime: 1267650600228229401496703205653,
+                        prime: convert(0x000000000000000000000000000000000000000ffffffffffffffffffffffff1, uint256),
                         bounty: 8000000000000000000,
                         redeemed: False})
-    self.challenges[4] = Challenge({check_value: 277818055635125894500549508635020939361127221,
+    self.challenges[4] = Challenge({check_value: convert(0x000000000000000000000000000702d2c3f5a88d34d7ac4ca0d4792c15cbeead, uint256),
                         check_length: 148,
-                        prime: 356811923176489970264571492362373784095686747,
+                        prime: convert(0x000000000000000000000000000fffffffffffffffffffffffffffffffffff59, uint256),
                         bounty: 16000000000000000000,
                         redeemed: False})
     self.challenges_length = 5
