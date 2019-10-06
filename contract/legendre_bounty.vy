@@ -11,13 +11,13 @@ DAY: constant(timedelta) = 24 * HOUR
 YEAR: constant(timedelta) = 365 * DAY
 LOCK_DELAY: constant(timedelta) = 1 * DAY
 
-contract_terminates: timestamp
 owner: address 
 
 challenges: public(map(uint256, Challenge))
+challenges_length: public(uint256)
+
 locks: public(map(bytes32, timestamp))
 
-challenges_length: uint256
 
 @public
 @payable
@@ -27,24 +27,29 @@ def __init__():
     self.challenges[0] = Challenge({check_value: 11000376394030634920152109547510169061,
                         check_length: 128,
                         prime: 18446744073709551629,
-                        bounty: 6400000000000000000,
+                        bounty: 1000000000000000000,
                         redeemed: False})
-    self.challenges[1] = Challenge({check_value: 211315256989990178547101110263436988077215608,
+    self.challenges[1] = Challenge({check_value: 230210477493954852901776032461715770460580,
+                        check_length: 148,
+                        prime: 18889465931478580854821,
+                        bounty: 2000000000000000000,
+                        redeemed: False})
+    self.challenges[2] = Challenge({check_value: 211315256989990178547101110263436988077215608,
                         check_length: 148,
                         prime: 19342813113834066795298819,
-                        bounty: 8400000000000000000,
+                        bounty: 4000000000000000000,
                         redeemed: False})
-    self.challenges[2] = Challenge({check_value: 242829690746151433119885568607676994314595293,
+    self.challenges[3] = Challenge({check_value: 242829690746151433119885568607676994314595293,
                         check_length: 148,
                         prime: 1267650600228229401496703205653,
-                        bounty: 10000000000000000000,
+                        bounty: 8000000000000000000,
                         redeemed: False})
-    self.challenges[3] = Challenge({check_value: 277818055635125894500549508635020939361127221,
+    self.challenges[4] = Challenge({check_value: 277818055635125894500549508635020939361127221,
                         check_length: 148,
                         prime: 356811923176489970264571492362373784095686747,
-                        bounty: 14800000000000000000,
+                        bounty: 16000000000000000000,
                         redeemed: False})
-    self.challenges_length = 4                                                                            
+    self.challenges_length = 5
 
 
 @private

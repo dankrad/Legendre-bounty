@@ -34,3 +34,10 @@ def test_check_challenge(legendre_bounty_contract,
     call = legendre_bounty_contract.functions.challenges__prime(challenge_no)
     prime = call.call()
     assert prime == challenge["prime"]
+
+
+def test_challenges_length(legendre_bounty_contract,
+                           w3):
+    call = legendre_bounty_contract.functions.challenges_length()
+    num = call.call()
+    assert num == len(challenges)
