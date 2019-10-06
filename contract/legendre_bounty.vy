@@ -29,7 +29,7 @@ def __init__():
                         prime: 18446744073709551629,
                         bounty: 1000000000000000000,
                         redeemed: False})
-    self.challenges[1] = Challenge({check_value: 230210477493954852901776032461715770460580,
+    self.challenges[1] = Challenge({check_value: 230210477493954852901776032461715770460580566,
                         check_length: 148,
                         prime: 18889465931478580854821,
                         bounty: 2000000000000000000,
