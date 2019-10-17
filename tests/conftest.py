@@ -6,7 +6,7 @@ import re
 import pytest
 
 from contract.utils import (
-    get_legendre_bounty_contract_code,
+    get_legendre_bounty_bytecode,
 )
 import eth_tester
 from eth_tester import (
@@ -42,9 +42,9 @@ def w3(tester):
 
 @pytest.fixture
 def legendre_bounty_contract(w3, tester):
-    legendre_bounty_contract_code = get_legendre_bounty_contract_code()
-    contract_abi = compiler.mk_full_signature(legendre_bounty_contract_code)
-    contract_bytecode = compiler.compile_code(legendre_bounty_contract_code)['bytecode']
+    legendre_bounty_contract_json = get_legendre_bounty_bytecode()
+    contract_abi = legendre_bounty_contract_json['abi']
+    contract_bytecode = legendre_bounty_contract_json['bin']
     legendre = w3.eth.contract(abi=contract_abi,
                                bytecode=contract_bytecode)
     tx_hash = legendre.constructor().transact({"value": sum(c["bounty"] for c in challenges.values())})
