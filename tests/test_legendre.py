@@ -33,7 +33,7 @@ def test_legendre_bit_multi(legendre_bounty_contract,
                             w3,
                             value,
                             prime):
-    call = legendre_bounty_contract.functions.legendre_bit_multi_test(value, prime, 100)
+    call = legendre_bounty_contract.functions.legendre_bit_multi(value, prime, 100)
     print(call.estimateGas())
     result = call.call()
     assert result == jacobi_bit_multi(value, prime, 100)
@@ -49,6 +49,6 @@ def test_legendre_bit_multi_over_zero(legendre_bounty_contract,
                             w3,
                             value,
                             prime):
-    call = legendre_bounty_contract.functions.legendre_bit_multi_test(value, prime, 10)
+    call = legendre_bounty_contract.functions.legendre_bit_multi(value, prime, 10)
     result = call.call()
     assert result == jacobi_bit_multi(value, prime, 10)
