@@ -1,0 +1,24 @@
+28,29c28,29
+<         // Test challenges
+<         challenges[0] = Challenge({check_value: 0x0000000000000000000000000000000005d3446a44efe462f105619a1523928f,
+---
+>         // Real challenges
+>         challenges[0] = Challenge({check_value: 0x00000000000000000000000000000000574fb3b032a69799873a3335cf928752,
+33,34c33,34
+<                             redeemed: false});
+<         challenges[1] = Challenge({check_value: 0x000000000000000000000000000ccabbdd1a2ce2c7fba2177a60f26e4da3dfe4,
+---
+>                             redeemed: true});
+>         challenges[1] = Challenge({check_value: 0x0000000000000000000000000005bfc5abb616dcb96eb812884d9be93ef9f42e,
+39c39
+<         challenges[2] = Challenge({check_value: 0x000000000000000000000000000665172ef496d21b642f9762a741d65e1acb7e,
+---
+>         challenges[2] = Challenge({check_value: 0x000000000000000000000000000bafca94ade9b5201633be31512efcaec7cbe6,
+44c44
+<         challenges[3] = Challenge({check_value: 0x0000000000000000000000000006f18b295f9e4d35025473b589dc1b0b5e10c7,
+---
+>         challenges[3] = Challenge({check_value: 0x0000000000000000000000000008544ea9871766a120112b6106bb0a2e6e34c5,
+49c49
+<         challenges[4] = Challenge({check_value: 0x000000000000000000000000000702d2c3f5a88d34d7ac4ca0d4792c15cbeead,
+---
+>         challenges[4] = Challenge({check_value: 0x000000000000000000000000000aaf064eee3a15f46755777368a8abc00f274e,
