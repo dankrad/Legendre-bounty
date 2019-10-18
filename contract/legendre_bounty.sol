@@ -1,6 +1,6 @@
 pragma solidity ^0.5.11;
 
-contract Legendre {
+contract LegendreBounty {
 
     struct Challenge {
         uint check_value;
