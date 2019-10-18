@@ -9,20 +9,20 @@ contract Legendre {
         uint bounty;
         bool redeemed;
     }
-    
+
     uint constant LEGENDRE_BIT_MULTI_MAX = 256;
     uint constant HOUR = 3600;
     uint constant DAY = 24 * HOUR;
     uint constant CLAIM_DELAY = 1 * DAY;
-    
+
     address owner;
-    
+
     mapping(uint => Challenge) public challenges;
     uint public challenges_length;
-    
+
     mapping(bytes32 => uint256) public claims;
-    
-    
+
+
     constructor () public payable {
         owner = msg.sender;
         // Test challenges
@@ -53,30 +53,29 @@ contract Legendre {
                             redeemed: false});
         challenges_length = 5;
     }
-    
-    function expmod(uint base, uint e, uint m) public view returns (uint o) {
-  
-           assembly {
-           // define pointer
-           let p := mload(0x40)
-           // store data assembly-favouring ways
-           mstore(p, 0x20)             // Length of Base
-           mstore(add(p, 0x20), 0x20)  // Length of Exponent
-           mstore(add(p, 0x40), 0x20)  // Length of Modulus
-           mstore(add(p, 0x60), base)  // Base
-           mstore(add(p, 0x80), e)     // Exponent
-           mstore(add(p, 0xa0), m)     // Modulus
-           if iszero(staticcall(sub(gas, 2000), 0x05, p, 0xc0, p, 0x20)) {
-             revert(0, 0)
-           }
-           // data
-           o := mload(p)
-         }
-        
+
+
+    function expmod(uint base, uint e, uint m) private view returns (uint o) {
+        assembly {
+            // define pointer
+            let p := mload(0x40)
+            // store data assembly-favouring ways
+            mstore(p, 0x20)             // Length of Base
+            mstore(add(p, 0x20), 0x20)  // Length of Exponent
+            mstore(add(p, 0x40), 0x20)  // Length of Modulus
+            mstore(add(p, 0x60), base)  // Base
+            mstore(add(p, 0x80), e)     // Exponent
+            mstore(add(p, 0xa0), m)     // Modulus
+            if iszero(staticcall(sub(gas, 2000), 0x05, p, 0xc0, p, 0x20)) {
+                revert(0, 0)
+            }
+            // data
+            o := mload(p)
+        }
     }
     
     
-    function legendre_bit(uint input_a, uint q) private view returns (uint o) {
+    function legendre_bit(uint input_a, uint q) private view returns (uint) {
         uint a = input_a;
         if(a >= q) {
             a = a % q;
@@ -99,7 +98,7 @@ contract Legendre {
     }
     
     
-    function legendre_bit_multi(uint input_a, uint q, uint n) private view returns (uint o) {
+    function legendre_bit_multi(uint input_a, uint q, uint n) public view returns (uint) {
         uint a = input_a;
         uint r = 0;
         require(n < LEGENDRE_BIT_MULTI_MAX);
@@ -109,11 +108,6 @@ contract Legendre {
             a += 1;
         }
         return r;
-    }
-    
-    
-    function legendre_bit_multi_test(uint input_a, uint q, uint n) public view returns (uint o) {
-        return legendre_bit_multi(input_a, q, n);
     }
     
     
