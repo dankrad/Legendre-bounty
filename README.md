@@ -8,7 +8,17 @@ The contract provides an interface to redeem a bounty that was set for Legendre 
 
 This project uses `pipenv`, https://docs.pipenv.org/en/latest/.
 
-## Install
+## Installation
+
+### Prerequisites
+
+On MacOS:
+
+```bash
+brew install gmp libmpc mpfr
+```
+
+## To install package
 
 ```bash
 pipenv shell
